@@ -42,21 +42,12 @@ class Command(BaseCommand):
         finally:
             self._stop_gulp()
 
-    def _generate_gulp_args(self, task=None):
-        args = [config.GULP_CLI_FILE]
-        if task:
-            args.append(task)
-        args.append("--static_url={}".format(settings.STATIC_URL))
-        if settings.DEBUG:
-            args.append("--assets_debug=1")
-        return args
-
     def _start_gulp(self):
         env = os.environ.copy()
         env["NODE_PREFIX"] = config.NODE_PREFIX
 
         self._process = subprocess.Popen(
-            self._generate_gulp_args(),
+            config.generate_gulp_args(),
             env=env,
             cwd=config.GULP_CLI_PATH
         )
