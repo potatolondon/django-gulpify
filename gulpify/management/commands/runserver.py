@@ -1,9 +1,10 @@
 import os
 import subprocess
 
+from django.core.exceptions import ImproperlyConfigured
 from django.core.management import load_command_class
 from django.conf import settings
-from gulp import config
+from gulpify import config
 
 
 def locate_runserver():
@@ -12,7 +13,11 @@ def locate_runserver():
         subclass whichever one had precedence before the gulpify app and subclass that
     """
 
-    index = settings.INSTALLED_APPS.index('gulp')
+    try:
+        index = settings.INSTALLED_APPS.index('gulpify')
+    except ValueError:
+        raise ImproperlyConfigured("Unable to locate gulpify in INSTALLED_APPS")
+
     for i in xrange(index + 1, len(settings.INSTALLED_APPS)):
         app_label = settings.INSTALLED_APPS[i]
         command = load_command_class(app_label, 'runserver')
