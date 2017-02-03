@@ -12,7 +12,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         env = os.environ.copy()
-        env["NODE_PATH"] = config.NODE_PREFIX
+        env["NODE_PREFIX"] = config.NODE_PREFIX
+        env["NODE_PATH"] = config.NODE_PATH
 
         check_call(
             config.generate_gulp_args(options["command"]),

@@ -45,7 +45,7 @@ class Command(BaseCommand):
     def _start_gulp(self):
         env = os.environ.copy()
         env["NODE_PREFIX"] = config.NODE_PREFIX
-
+        env["NODE_PATH"] = config.NODE_PATH
         self._process = subprocess.Popen(
             config.generate_gulp_args(),
             env=env,
