@@ -1,9 +1,10 @@
 import os
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+from os.path import abspath
 
-NODE_PREFIX = os.environ.get("NODE_PREFIX", settings.NODE_PREFIX)
-NODE_PATH = os.environ.get("NODE_PATH", os.path.join(NODE_PREFIX, "node_modules"))
+NODE_PREFIX = abspath(os.environ.get("NODE_PREFIX", settings.NODE_PREFIX))
+NODE_PATH = abspath(os.environ.get("NODE_PATH", os.path.join(NODE_PREFIX, "node_modules")))
 GULP_CLI_PATH = os.path.join(NODE_PATH, "gulp-cli/bin/")
 GULP_PATH = os.path.join(NODE_PATH, "gulp/bin/")
 GULP_CLI_FILE = os.path.join(GULP_CLI_PATH, "gulp.js")

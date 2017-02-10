@@ -47,7 +47,6 @@ class Command(BaseCommand):
         env["NODE_PREFIX"] = config.NODE_PREFIX
         env["NODE_PATH"] = config.NODE_PATH
         args = config.generate_gulp_args()
-        print args
         self._process = subprocess.Popen(
             args,
             env=env,
