@@ -46,8 +46,10 @@ class Command(BaseCommand):
         env = os.environ.copy()
         env["NODE_PREFIX"] = config.NODE_PREFIX
         env["NODE_PATH"] = config.NODE_PATH
+        args = config.generate_gulp_args()
+        print args
         self._process = subprocess.Popen(
-            config.generate_gulp_args(),
+            args,
             env=env,
             cwd=config.GULP_CLI_PATH
         )
