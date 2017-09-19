@@ -35,9 +35,14 @@ class Command(BaseCommand):
         self._process = None
         super(Command, self).__init__(*args, **kwargs)
 
+    def add_arguments(self, parser):
+        super(Command, self).add_arguments(parser)
+        parser.add_argument("--nogulp", action="store_false", dest="gulp", default=True)
+
     def run(self, *args, **kwargs):
         try:
-            self._start_gulp()
+            if kwargs.get("gulp", True):
+                self._start_gulp()
             super(Command, self).run(*args, **kwargs)
         finally:
             self._stop_gulp()
