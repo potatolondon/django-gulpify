@@ -8,7 +8,7 @@ from gulpify import config
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
-        parser.add_argument("command", type=str, default="default")
+        parser.add_argument("command", type=str, default="default", nargs="?")
 
     def handle(self, *args, **options):
         env = os.environ.copy()
