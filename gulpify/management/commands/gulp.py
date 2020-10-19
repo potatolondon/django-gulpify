@@ -19,6 +19,4 @@ class Command(BaseCommand):
             config.generate_gulp_args(options["command"]),
             env=env,
             cwd=config.GULP_CLI_PATH,
-            stdout=self.stdout,
-            stderr=self.stderr
         )
